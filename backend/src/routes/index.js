@@ -1,8 +1,15 @@
 const { Router } = require('express');
-const routeExemple = require('./routeExemple');
+const dialogFlowRoutes = require('./dialogFlowRoutes');
 
 const routes = Router();
 
-routes.use(routeExemple);
+routes.get('/', (_req, res) => {
+    return res.json({
+        success: true,
+        message: "Api no ar"
+    })
+});
+
+routes.use(dialogFlowRoutes);
 
 module.exports = routes;
