@@ -3,12 +3,14 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-    height: 500px; 
+    height: 600px; 
     width: 450px;
-    padding: 20px;
     border-radius: 10px;
-    margin-top: 10vh;
-    margin-right: 10vh;
+    position: absolute;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    bottom: 0;
+    right: 0;
     float: right; 
     background-color: #005f92;
 }
@@ -22,7 +24,14 @@
 
 .textContainer {
     height: 70px;
-    background-color: #bfd8e6;
+    background-color: #fafafa;
     border-radius: 5px;
+    padding: 10px;
+    text-align: center;
 }
 
+.cards {
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}

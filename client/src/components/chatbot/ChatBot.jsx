@@ -3,6 +3,7 @@ import axios from 'axios'
 import styles from '../css/ChatBot.module.css'
 
 import Message from './Message';
+import Card from './Card';
 
 class ChatBot extends Component {
 
@@ -29,8 +30,9 @@ class ChatBot extends Component {
         const res = await axios.post('http://localhost:5001/api/df_text_query', { text });
 
         for (let msg of res.data.fulfillmentMessages) {
+            console.log(JSON.stringify(msg));
             says = {
-                speaks: 'bot',
+                speaks: 'Aura',
                 msg: msg
             }
             this.setState({ messages: [...this.state.messages, says]})
@@ -42,7 +44,7 @@ class ChatBot extends Component {
       
         for (let msg of res.data.fulfillmentMessages) {
           let says = {
-            speaks: 'bot',
+            speaks: 'Aura',
             msg: msg
           };
           this.setState({ messages: [...this.state.messages, says] });
@@ -59,10 +61,36 @@ class ChatBot extends Component {
         this.messagesEnd.scrollIntoView({ behaviour: 'smooth'})
     }
 
+    renderCards(cards) {
+        return cards.map((card, i) => <Card key={i} payload={card.structValue} />)
+    }
+
+    renderOneMessage(message, i) {
+        if (message.msg && message.msg.text && message.msg.text.text) {
+            return <Message key={i} speaks={message.speaks} text={message.msg.text.text} />;
+        } else if (message.msg && message.msg.payload && message.msg.payload.fields && message.msg.payload.fields.cards){
+            return <div key={i}>
+                <div className="card-panel grey lighten-5 z-depth-1">
+                    <div style={{ overflow: 'hidden' }}>
+                        <div className="col s2">
+                            <a className="btn-floating btn-large waves-effect waves-light red">{ message.speaks }</a>
+                        </div>
+                        <div className={ styles.cards}>
+                            <div>
+                                <p style={{ color: 'black'}}>Sure, we have some options for you!</p>
+                                { this.renderCards(message.msg.payload.fields.cards.listValue.values) }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
     renderMessages(stateMessages) {
         if (stateMessages) {
             return stateMessages.map((message, i) => {
-                return <Message key={i} speaks={message.speaks} text={message.msg.text.text} />;
+                return this.renderOneMessage(message, i)
             });
         } else {
             return null;
@@ -80,7 +108,7 @@ class ChatBot extends Component {
   render() {
     return (
         <div className={ styles.container }>
-            <h2 >Aura.bot</h2>
+            <h4>Aura.bot</h4>
           <div className={ styles.wrapper }>
             {this.renderMessages(this.state.messages)}
             <div
