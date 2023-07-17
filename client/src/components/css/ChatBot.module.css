@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 500px; 
+    width: 450px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10vh;
+    margin-right: 10vh;
+    float: right; 
+    background-color: #005f92;
+}
+
+.wrapper {
+    height: 70%; 
+    width: 100%;
+    padding: 10px;
+    overflow: auto;
+}
+
+.textContainer {
+    height: 70px;
+    background-color: #bfd8e6;
+    border-radius: 5px;
+}
+

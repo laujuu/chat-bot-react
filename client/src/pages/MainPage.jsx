@@ -6,12 +6,10 @@ class MainPage extends React.Component {
     return (
       <main>
         <div className={styles.container}>
-          <div>
-            <h1 className={styles.title}>LoanStar</h1>
-            <h3>
-              Shine Bright with LoanStar: Your Guide to Financial Freedom!
-            </h3>
-          </div>
+          <h1 className={styles.title}>LoanStar</h1>
+          <h3>
+            Shine Bright with LoanStar: Your Guide to Financial Freedom!
+          </h3>
         </div>
       </main>
     );
