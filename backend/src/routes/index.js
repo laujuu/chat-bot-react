@@ -1,5 +1,7 @@
 const { Router } = require('express');
 const dialogFlowRoutes = require('./dialogFlowRoutes');
+const loginRoutes = require('./loginRoutes');
+const registerRoutes = require('./registerRoutes')
 
 const routes = Router();
 
@@ -11,5 +13,7 @@ routes.get('/', (_req, res) => {
 });
 
 routes.use(dialogFlowRoutes);
+routes.use(loginRoutes);
+routes.use(registerRoutes);
 
 module.exports = routes;
