@@ -12,6 +12,7 @@ const Navbar = () => {
           <li className={ styles.nav_item }><Link to="/">Inicio</Link></li>
           <li className={ styles.nav_item }><Link to="/sobre">Sobre</Link></li>
           <li className={ styles.nav_item }><Link to="/contato">Contato</Link></li>
+          <li className={ styles.nav_item }><Link to="/exportcsv">Admin</Link></li>
         </ul>
       </div>
     </nav>
