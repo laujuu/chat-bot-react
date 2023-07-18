@@ -35,6 +35,27 @@ class ChatBot extends Component {
         this.setState({ messages: [...this.state.messages, says] });
         const res = await axios.post('http://localhost:5001/api/df_text_query', { text });
 
+        if (text.toLowerCase().includes('goodbye')) {
+            const { username } = this.state;
+            const message = 'Goodbye';
+        
+            try {
+              await axios.post('http://localhost:5001/goodbye', { username, message });
+            } catch (error) {
+              console.error('Error while saving conversation:', error);
+            }
+            const goodbyeMessage = {
+              speaks: 'Aura',
+              msg: {
+                text: {
+                  text: `Goodbye ${username}! See ya later!`
+                }
+              }
+            };
+            this.setState({ messages: [...this.state.messages, goodbyeMessage] });
+            return;
+          }
+
         for (let msg of res.data.fulfillmentMessages) {
             console.log(JSON.stringify(msg));
             says = {
@@ -48,11 +69,10 @@ class ChatBot extends Component {
     async df_event_query(event) {
         const res = await axios.post('http://localhost:5001/api/df_event_query', { event });
         if (!this.state.isLoggedIn && this.state.messages.length === 0 && event !== 'Welcome') {
-            // Se o usuário não estiver logado, a lista de mensagens estiver vazia e não for o evento 'Welcome', exibe o popup de login
             this.setState({ isLoginPopupVisible: true });
             return;
-
         }
+        
         for (let msg of res.data.fulfillmentMessages) {
 
             let says = {
@@ -180,7 +200,7 @@ class ChatBot extends Component {
                                 {this.state.isLoginError && <p className={styles.errorMessage}>Username or password incorrect.</p>}
                                 <input type="text" placeholder="Usuário" onChange={this.handleUsernameChange} />
                                 <input type="password" placeholder="Senha" onChange={this.handlePasswordChange} />
-                                <button style={{ marginTop: '20px'}} class="waves-effect blue darken-3 btn-small" onClick={this.handleLogin}>Entrar</button>
+                                <button style={{ marginTop: '20px'}} className="waves-effect blue darken-3 btn-small" onClick={this.handleLogin}>Entrar</button>
                             </div>
                         </div>
                     )}

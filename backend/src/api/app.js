@@ -29,13 +29,5 @@ app.get('/hithere', (_req, res) => {
     res.send({'Hello': 'there'});
 });
 
-app.get('/api/checkLoginStatus', (req, res) => {
-    // Verifica o status de login do usuário
-    const isLoggedIn = req.session.isLoggedIn || false;
-  
-    // Retorna o status de login como resposta
-    res.json({ isLoggedIn });
-  });
-
 
 module.exports = app;
