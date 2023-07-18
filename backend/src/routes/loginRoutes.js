@@ -12,6 +12,7 @@ loginRoutes.post('/login', async (req, res) => {
       return res.status(404).json({ message: 'Usuário não encontrado' });
     }
 
+    req.session.isLoggedIn = true;
     if (user.password !== password) {
       return res.status(401).json({ message: 'Senha incorreta' });
     }
@@ -22,5 +23,13 @@ loginRoutes.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Erro ao fazer login' });
   }
 });
+
+loginRoutes.get('/checkLoginStatus', (req, res) => {
+    if (req.session.isLoggedIn) {
+      res.json({ isLoggedIn: true });
+    } else {
+      res.json({ isLoggedIn: false });
+    }
+  });
 
 module.exports = loginRoutes;

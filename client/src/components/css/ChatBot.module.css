@@ -35,3 +35,21 @@
     flex-direction: column;
     text-align: center;
 }
+
+.loginPopup {
+    height: 360px;
+    background-color: #fafafa;
+    color: black;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.errorMessage {
+    color: red;
+}
+
+input::placeholder {
+    color: #8295d3;
+  }
+  
