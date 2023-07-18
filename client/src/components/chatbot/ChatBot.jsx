@@ -33,14 +33,14 @@ class ChatBot extends Component {
             }
         };
         this.setState({ messages: [...this.state.messages, says] });
-        const res = await axios.post('http://localhost:5001/api/df_text_query', { text });
+        const res = await axios.post('https://laura-chatbot.onrender.com/api/df_text_query', { text });
 
         if (text.toLowerCase().includes('goodbye')) {
             const { username } = this.state;
             const message = 'Goodbye';
         
             try {
-              await axios.post('http://localhost:5001/goodbye', { username, message });
+              await axios.post('https://laura-chatbot.onrender.com/goodbye', { username, message });
             } catch (error) {
               console.error('Error while saving conversation:', error);
             }
@@ -67,7 +67,7 @@ class ChatBot extends Component {
     }
 
     async df_event_query(event) {
-        const res = await axios.post('http://localhost:5001/api/df_event_query', { event });
+        const res = await axios.post('https://laura-chatbot.onrender.com/api/df_event_query', { event });
         if (!this.state.isLoggedIn && this.state.messages.length === 0 && event !== 'Welcome') {
             this.setState({ isLoginPopupVisible: true });
             return;
@@ -99,7 +99,7 @@ class ChatBot extends Component {
 
     checkLoginStatus = async () => {
         try {
-            const response = await axios.get('http://localhost:5001/checkLoginStatus');
+            const response = await axios.get('https://laura-chatbot.onrender.com/checkLoginStatus');
             return response.data.isLoggedIn;
         } catch (error) {
             console.error('Erro ao verificar o status do login:', error);
@@ -111,7 +111,7 @@ class ChatBot extends Component {
         const { username, password } = this.state;
 
         try {
-            const response = await axios.post('http://localhost:5001/login', { username, password });
+            const response = await axios.post('https://laura-chatbot.onrender.com/login', { username, password });
 
             if (response.status === 200) {
                 this.setState({ isLoginPopupVisible: false, isInputDisabled: false, isLoginError: false });
