@@ -29,6 +29,7 @@
 </ul>
 
   #### [ACESSAR WEBSITE](https://chat-bot-react-alpha.vercel.app/)
+  Nota: por conta de usar serviços gratuitos, o servidor pode demorar um pouco para carregar o chatbot
 
 
 
